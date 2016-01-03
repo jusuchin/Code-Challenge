@@ -1,13 +1,5 @@
 var app = angular.module('app', ['ngSanitize']);
 
-app.filter('map', function() {
-  return function(input, propName) {
-    return input.map(function(item) {
-      return item[propName];
-    });
-  };
-});
-
 app.factory('apiService', function ($http) {
     var booksApiEndPoint = 'https://www.googleapis.com/books/v1/volumes'
     return {
