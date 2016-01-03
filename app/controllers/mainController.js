@@ -13,7 +13,7 @@ app.controller('MainController', ['$scope', 'apiService', function ($scope, apiS
                 });
         }
 
-        if ($scope.searchTerm === '') {
+        if (typeof $scope.searchTerm === 'undefined' || $scope.searchTerm === '') {
             $scope.resultsFound = false;
             $scope.resultsMessage = 'No search term was entered. Please enter a search term.'
         }
