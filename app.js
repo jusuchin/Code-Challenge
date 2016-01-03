@@ -28,7 +28,6 @@ app.controller('MainController', ['$scope', 'apiService', function ($scope, apiS
                 .then(function (apiResponse) {
                     $scope.books = apiResponse;
                     $scope.resultsFound = true;
-                    console.log($scope.books);
                     $scope.lastSearchTerm = $scope.searchTerm;
                     if ($scope.books.totalItems == 0) {
                         $scope.resultsFound = false;
