@@ -1,19 +1,4 @@
-var app = angular.module('app', ['ngSanitize']);
-
-app.factory('apiService', function ($http) {
-    var booksApiEndPoint = 'https://www.googleapis.com/books/v1/volumes'
-    return {
-        getBooks: function (searchTerm) {
-            return $http.get(booksApiEndPoint + '?q=' + searchTerm + '&projection=lite&maxResults=15')
-                .then(function (response) {
-                    return response.data;
-                })
-        }
-    }
-});
-
 app.controller('MainController', ['$scope', 'apiService', function ($scope, apiService) {
-
     $scope.getBooks = function () {
         if (typeof $scope.searchTerm !== 'undefined' && $scope.searchTerm !== '') {
             apiService.getBooks($scope.searchTerm)
@@ -33,5 +18,4 @@ app.controller('MainController', ['$scope', 'apiService', function ($scope, apiS
             $scope.resultsMessage = 'No search term was entered. Please enter a search term.'
         }
     }
-
 }]);
