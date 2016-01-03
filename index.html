@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script src="https://code.angularjs.org/1.4.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.js"></script>
+    <link href="style.css" rel="stylesheet" />
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="MainController">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Code Challenge - Search Page</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <header class="text-center">
+            <h1 id="headerTitle">Google Books Search Page</h1>
+        </header>
+        <section>
+            <form class="text-center" ng-submit="getBooks()">
+                <input type="text" id="searchBox" placeholder="Press enter or click 'Search'' to get results." ng-model="searchTerm" />
+                <input type="submit" value="Search" />
+            </form>
+        </section>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div id="column1" class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Content Placeholder</h3>
+                    </div>
+                    <div class="panel-body">
+                        Lorem ipsum dolor sit amet, vitae suspendisse lobortis, posuere amet sed vitae, ridiculus nec, vestibulum turpis in rutrum
+                        hac donec, quis dignissim donec vel tincidunt. Sit lorem dapibus sit, aliquam molestie scelerisque
+                        consectetuer orci elit imperdiet. Orci sed, amet et varius. Libero ullamcorper semper, amet commodo
+                        id dolor ut. Sed quisque, egestas eget at molestie nunc luctus erat. Libero eu, sapien quis volutpat,
+                        natoque vitae lacinia duis non nec sed. Nascetur at velit ante in justo, maecenas vel vitae at leo.
+                        Lectus pede hendrerit neque, id elit eget semper non egestas ipsum, cursus sed et, quam turpis mauris
+                        erat viverra. Quis ante urna quis sed hendrerit amet, quis dolor ac quis, fusce id, quis malesuada
+                        praesent et erat, scelerisque id ad orci.
+                    </div>
+                </div>
+            </div>
+            <div id="column2" class="col-lg-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Search Results</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row clearfix">
+                            <div class="col-lg-12">
+                                <div ng-if="resultsFound">
+                                    <p>You searched for <b>"{{lastSearchTerm}}"</b> and we found <b>{{books.totalItems}}</b> matching items.</p>
+                                    <p>Displaying the first <b>{{books.items.length}}</b> results.</p>
+                                </div>
+                                <div class="spacer"></div>
+                                <div ng-repeat="item in books.items | orderBy:'volumeInfo.title'" ng-if="resultsFound">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><a ng-href="{{item.volumeInfo.infoLink}}" target="_blank">{{item.volumeInfo.title}}</a></h3>
+                                            <h5>{{item.volumeInfo.authors.join(', ')}}</h5>
+                                        </div>
+                                        <div class="panel-body">
+                                            <img ng-if="item.volumeInfo.imageLinks != null" ng-src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="thumbnail" />
+                                            <div ng-if="item.volumeInfo.imageLinks == null">No Thumbnail Available.</div>
+                                            <div><b>Description</b>
+                                                <div ng-if="item.volumeInfo.description !== null">{{item.volumeInfo.description}}</div>
+                                                <div ng-if="item.volumeInfo.description == null">No Description Available.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="!resultsFound">
+                                    {{resultsMessage}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div ng-if="books.totalItems" class="text-center">Total Items: {{books.totalItems}}</div>
+    </footer>
+</body>
+
+</html>

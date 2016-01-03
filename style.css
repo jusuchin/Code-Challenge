@@ -1,0 +1,15 @@
+a { 
+    color: #337ab7 !important;
+}
+
+#searchResults {
+  background: skyblue;
+}
+
+#searchBox {
+    width: 300px;
+}
+
+.spacer {
+    margin-top: 20px;
+}
