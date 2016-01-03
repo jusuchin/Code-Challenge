@@ -1,6 +1,7 @@
-a { 
-    color: #337ab7 !important;
-}
+.panel-title > a, .panel-title > small, .panel-title > .small, .panel-title > small > a, .panel-title > .small > a
+ {
+     color: #337ab7 !important;
+ }
 
 #searchResults {
   background: skyblue;
